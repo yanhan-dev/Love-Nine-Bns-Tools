@@ -43,4 +43,3 @@ C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Release\xmlRevise.exe.man
 C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Release\xmlRevise.application
 C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Release\xmlRevise.exe
 C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Release\xmlRevise.pdb
-C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Release\xmlRevise.csprojResolveAssemblyReference.cache

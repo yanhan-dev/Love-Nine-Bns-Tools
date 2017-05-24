@@ -17,7 +17,6 @@ C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\bin\Debug\xmlRevise.pdb
 C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Debug\xmlRevise.Form1.resources
 C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Debug\xmlRevise.exe
 C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Debug\xmlRevise.pdb
-C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Debug\xmlRevise.csprojResolveAssemblyReference.cache
 C:\Users\luanf\Desktop\xmlRevise\xmlRevise\bin\Debug\xmlRevise.exe.config
 C:\Users\luanf\Desktop\xmlRevise\xmlRevise\obj\Debug\xmlRevise.exe
 C:\Users\luanf\Desktop\xmlRevise\xmlRevise\obj\Debug\xmlRevise.pdb
@@ -37,3 +36,7 @@ F:\xmlRevise\xmlRevise\obj\Debug\xmlRevise.Resource1.resources
 F:\xmlRevise\xmlRevise\obj\Debug\xmlRevise.csproj.GenerateResource.Cache
 F:\xmlRevise\xmlRevise\obj\Debug\xmlRevise.exe
 F:\xmlRevise\xmlRevise\obj\Debug\xmlRevise.pdb
+C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\bin\Debug\xmlRevise.exe.manifest
+C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\bin\Debug\xmlRevise.application
+C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Debug\xmlRevise.exe.manifest
+C:\Users\Administrator\Desktop\xmlRevise\xmlRevise\obj\Debug\xmlRevise.application

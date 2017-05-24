@@ -126,7 +126,7 @@ namespace xmlRevise
             }
             catch (Exception err)
             {
-                MessageBox.Show(err.ToString(),"bnsdat操作事件");
+                MessageBox.Show(err.ToString(), "bnsdat操作事件");
                 return false;
             }
         }
@@ -236,7 +236,7 @@ namespace xmlRevise
                 label_Now.Text = "解包失败。";
                 MessageBox.Show("解包失败");
             }//总try结束
-            catch(Exception e_bt_unpack)
+            catch (Exception e_bt_unpack)
             {
                 MessageBox.Show(e_bt_unpack.ToString(), "解包按钮错误");
             }
@@ -306,7 +306,7 @@ namespace xmlRevise
                 xml.xmlWrite(xmlFilePath, GCD, breast, damage, autobuff, isNantian);
                 label_Now.Text = "保存完毕";
             }
-            catch(Exception e_bt_save)
+            catch (Exception e_bt_save)
             {
                 MessageBox.Show(e_bt_save.ToString(), "保存按钮");
             }
@@ -372,7 +372,7 @@ namespace xmlRevise
             }
             catch (Exception e_load)
             {
-                MessageBox.Show(e_load.ToString(),"载入按钮");
+                MessageBox.Show(e_load.ToString(), "载入按钮");
                 label_Now.Text = "载入失败！";
             }
 
@@ -436,46 +436,62 @@ namespace xmlRevise
         {
             try
             {
-                Backup_xml_config(); //打包之前先备份xml
-
-                initDisable();
-                label_Now.Text = "正在打包...";
-
-                if (OutPutForm_Shown(xmlFilePath, "-c xml.dat.files") && OutPutForm_Shown(xmlFilePath, "-c config.dat.files"))
+                if (Backup_xml_config())//打包之前先备份xml
                 {
-                    label_Now.Text = "打包完成。";
+                    initDisable();
+                    label_Now.Text = "正在打包...";
+
+                    if (OutPutForm_Shown(xmlFilePath, "-c xml.dat.files") && OutPutForm_Shown(xmlFilePath, "-c config.dat.files"))
+                    {
+                        label_Now.Text = "打包完成。";
+                    }
+                    else
+                    {
+                        label_Now.Text = "打包失败。";
+                        MessageBox.Show("打包失败");
+                    }
+                    initEnable();
                 }
                 else
                 {
-                    label_Now.Text = "打包失败。";
-                    MessageBox.Show("打包失败");
+                    MessageBox.Show("备份失败,请重试或者联系作者QQ:852932673");
                 }
-                initEnable();
+
+
+
             }
             catch (Exception e_Pack)
             {
-                MessageBox.Show(e_Pack.ToString());
+                MessageBox.Show(e_Pack.ToString(), "打包出错");
             }
 
         }
         #endregion
 
         #region 备份xml.dat config.dat
-        private void Backup_xml_config()
+        private bool Backup_xml_config()
         {
             if (File.Exists(xmlFilePath + "xml.dat") && File.Exists(xmlFilePath + "config.dat"))
             {
                 try
                 {
+                    if (!Directory.Exists(xmlFilePath + "备份"))
+                    {
+                        Directory.CreateDirectory(xmlFilePath + "备份");
+                    }
                     DateTime nowTime = DateTime.Now; //获取当前系统时间
-                    File.Copy(xmlFilePath + "xml.dat", xmlFilePath + "Backup\\xml.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
-                    File.Copy(xmlFilePath + "config.dat", xmlFilePath + "Backup\\config.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
+                    File.Copy(xmlFilePath + "xml.dat", xmlFilePath + "备份\\xml.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
+                    File.Copy(xmlFilePath + "config.dat", xmlFilePath + "备份\\config.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
+                    return true;
                 }
                 catch (Exception e) //拷贝出错
                 {
-                    MessageBox.Show(e.ToString(),"备份出错");
+                    MessageBox.Show(e.ToString(), "备份出错");
+
                 }
             }
+            MessageBox.Show("备份出错,文件不存在");
+            return false;
         }
         #endregion
 
