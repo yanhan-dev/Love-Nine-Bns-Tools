@@ -126,7 +126,7 @@ namespace xmlRevise
             }
             catch (Exception err)
             {
-                MessageBox.Show(err.ToString());
+                MessageBox.Show(err.ToString(),"bnsdat操作事件");
                 return false;
             }
         }
@@ -177,7 +177,7 @@ namespace xmlRevise
 
                         return;
                     }
-                    
+
                 }
                 //解包失败
                 initDisable();
@@ -199,99 +199,117 @@ namespace xmlRevise
         /// </summary>
         private void button_Unpack_Click(object sender, EventArgs e)
         {
-            initDisable();
+            try
+            {
+                initDisable();
 
-            if (!File.Exists(xmlFilePath + "bnsdat.exe"))
-            {
-                MessageBox.Show("你是不是把bnsdat.exe删了?快还原回来,如果还原不回来了那就重启本软件,我自己搞定 ^0~ ");
-                return;
-            }
-            label_Now.Text = "正在解包...";
-            //解包结束并且 client.config2.xml 不是0字节
-            if (OutPutForm_Shown(xmlFilePath,String.Format("{0}{1}", radioButton_E.Checked ? "-e " : "-x ", "xml.dat")) && OutPutForm_Shown(xmlFilePath, String.Format("{0}{1}", radioButton_E.Checked ? "-e " : "-x ", "config.dat")))
-            {
-                if (File.Exists(xmlFilePath + "xml.dat.files\\client.config2.xml") && File.Exists(xmlFilePath + "config.dat.files\\system.config2.xml"))
+                if (!File.Exists(xmlFilePath + "bnsdat.exe"))
                 {
-                    FileInfo xmldat = new FileInfo(xmlFilePath + "xml.dat.files\\client.config2.xml");
-                    FileInfo configdat = new FileInfo(xmlFilePath + "xml.dat.files\\client.config2.xml");
-                    if (xmldat.Length != 0 && configdat.Length != 0)
+                    MessageBox.Show("你是不是把bnsdat.exe删了?快还原回来,如果还原不回来了那就重启本软件,我自己搞定 ^0~ ");
+                    return;
+                }
+                label_Now.Text = "正在解包...";
+                //解包结束并且 client.config2.xml 不是0字节
+                if (OutPutForm_Shown(xmlFilePath, String.Format("{0}{1}", radioButton_E.Checked ? "-e " : "-x ", "xml.dat")) && OutPutForm_Shown(xmlFilePath, String.Format("{0}{1}", radioButton_E.Checked ? "-e " : "-x ", "config.dat")))
+                {
+                    if (File.Exists(xmlFilePath + "xml.dat.files\\client.config2.xml") && File.Exists(xmlFilePath + "config.dat.files\\system.config2.xml"))
                     {
-                        label_Now.Text = "解包完成。";
-                        initEnable();
-                        button_loadProfile.PerformClick(); //解包完成自动点击载入按钮
-                        return;
+                        FileInfo xmldat = new FileInfo(xmlFilePath + "xml.dat.files\\client.config2.xml");
+                        FileInfo configdat = new FileInfo(xmlFilePath + "xml.dat.files\\client.config2.xml");
+                        if (xmldat.Length != 0 && configdat.Length != 0)
+                        {
+                            label_Now.Text = "解包完成。";
+                            initEnable();
+                            button_loadProfile.PerformClick(); //解包完成自动点击载入按钮,
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("您的xml.dat和config.dat是被修改过的,编码方式已被改变,无法解包,请从QQ群493171881下载原版文件.", "解包失败");
+                            return;
+                        }
                     }
+
+
                 }
 
-                
+                label_Now.Text = "解包失败。";
+                MessageBox.Show("解包失败");
+            }//总try结束
+            catch(Exception e_bt_unpack)
+            {
+                MessageBox.Show(e_bt_unpack.ToString(), "解包按钮错误");
             }
-
-            label_Now.Text = "解包失败。";
-            MessageBox.Show("解包失败");
-
         }
+
         #endregion
 
         #region "保存"按钮事件
         private void button_save_Click(object sender, EventArgs e)
         {
-            label_Now.Text = "正在保存...";
-            xmlRW xml = new xmlRW();
-            int GCD = 100;
-            bool breast = false, damage = false, autobuff = true;
-            if (checkBox_Breast.Checked)
+            try
             {
-                breast = true;
-            }
-            if (checkBox_Six.Checked)
-            {
-                damage = true;
-            }
-            if (checkBox_autoBUFF.Checked == false)
-            {
-                autobuff = false;
-            }
-            if (radioButton_Ping100.Checked)
-            {
-                GCD = 100;
-            }
-            else if (radioButton_Ping150.Checked)
-            {
-                GCD = 150;
-            }
-            else if (radioButton_Ping180.Checked)
-            {
-                GCD = 180;
-            }
-            else if (radioButton_Ping200.Checked)
-            {
-                GCD = 200;
-            }
-            else if (radioButton_Input.Checked)
-            {
-                try
+                label_Now.Text = "正在保存...";
+                xmlRW xml = new xmlRW();
+                int GCD = 100;
+                bool breast = false, damage = false, autobuff = true;
+                if (checkBox_Breast.Checked)
                 {
-                    GCD = Convert.ToInt32(textBox_Ping.Text);
+                    breast = true;
                 }
-                catch
+                if (checkBox_Six.Checked)
                 {
-                    MessageBox.Show("GCD输入错误，请输入（100-255）之间的整数");
-                    return;
+                    damage = true;
+                }
+                if (checkBox_autoBUFF.Checked == false)
+                {
+                    autobuff = false;
+                }
+                if (radioButton_Ping100.Checked)
+                {
+                    GCD = 100;
+                }
+                else if (radioButton_Ping150.Checked)
+                {
+                    GCD = 150;
+                }
+                else if (radioButton_Ping180.Checked)
+                {
+                    GCD = 180;
+                }
+                else if (radioButton_Ping200.Checked)
+                {
+                    GCD = 200;
+                }
+                else if (radioButton_Input.Checked)
+                {
+                    try
+                    {
+                        GCD = Convert.ToInt32(textBox_Ping.Text);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("GCD输入错误，请输入（100-255）之间的整数");
+                        return;
+                    }
+
                 }
 
+                if (radioButton_NT.Checked) //如果选中南天国模式
+                {
+                    isNantian = true;
+                }
+                else if (radioButton_ZSF.Checked)
+                {
+                    isNantian = false;
+                }
+                xml.xmlWrite(xmlFilePath, GCD, breast, damage, autobuff, isNantian);
+                label_Now.Text = "保存完毕";
             }
-
-            if (radioButton_NT.Checked) //如果选中南天国模式
+            catch(Exception e_bt_save)
             {
-                isNantian = true;
+                MessageBox.Show(e_bt_save.ToString(), "保存按钮");
             }
-            else if (radioButton_ZSF.Checked)
-            {
-                isNantian = false;
-            }
-            xml.xmlWrite(xmlFilePath, GCD, breast, damage, autobuff, isNantian);
-            label_Now.Text = "保存完毕";
-
         }
         #endregion
 
@@ -354,10 +372,10 @@ namespace xmlRevise
             }
             catch (Exception e_load)
             {
-                MessageBox.Show(e_load.ToString());
+                MessageBox.Show(e_load.ToString(),"载入按钮");
                 label_Now.Text = "载入失败！";
             }
-            
+
         }
         #endregion
 
@@ -438,7 +456,7 @@ namespace xmlRevise
             {
                 MessageBox.Show(e_Pack.ToString());
             }
-            
+
         }
         #endregion
 
@@ -450,18 +468,15 @@ namespace xmlRevise
                 try
                 {
                     DateTime nowTime = DateTime.Now; //获取当前系统时间
-                    File.Copy(xmlFilePath + "xml.dat", xmlFilePath + "xml.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
-                    File.Copy(xmlFilePath + "config.dat", xmlFilePath + "config.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
+                    File.Copy(xmlFilePath + "xml.dat", xmlFilePath + "Backup\\xml.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
+                    File.Copy(xmlFilePath + "config.dat", xmlFilePath + "Backup\\config.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
                 }
                 catch (Exception e) //拷贝出错
                 {
-                    MessageBox.Show(e.ToString());
+                    MessageBox.Show(e.ToString(),"备份出错");
                 }
             }
-
-
         }
-
         #endregion
 
         #region 释放 bnsdat.exe
@@ -516,7 +531,7 @@ namespace xmlRevise
                     MessageBox.Show("找不到 system.config2.xml 请重新解压");
                     return;
                 }
-                
+
 
                 #region system.config2.xml 修改区
                 /*  system.config2.xml  修改区 开始 */
@@ -545,7 +560,7 @@ namespace xmlRevise
                     reader_NT.Close();
                     xmlDoc.Save(path + "config.dat.files\\system.config2.xml");
                 }
-                
+
                 /*  system.config2.xml  修改区 结束 */
                 #endregion
 
@@ -660,7 +675,7 @@ namespace xmlRevise
                                     }
                                 }
 
-                                
+
                             }
                         }
 
@@ -692,7 +707,7 @@ namespace xmlRevise
                 breast = false;
                 damage = false;
                 autoBUFF = true;
-                
+
                 string[] returnValues = new string[4];
                 XmlDocument xmlDoc = new XmlDocument();
                 XmlReaderSettings settings = new XmlReaderSettings();

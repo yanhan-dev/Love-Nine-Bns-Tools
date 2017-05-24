@@ -1,5 +1,9 @@
 # Love-Nine-Bns-Tools
 爱玖剑灵助手-xml.dat修改工具
+---
+
+Version 1.3.1 2017/05/24
++ 增加稳定性,增加xml.dat, config.dat损坏时提示原版文件下载地址
 
 Version 1.3 2017/05/23
 + 修复不能正常加载6人伤害统计设置的BUG,修复0522南天国(config.dat)不能正确修改的BUG
