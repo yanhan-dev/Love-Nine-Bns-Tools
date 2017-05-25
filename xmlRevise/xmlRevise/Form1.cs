@@ -208,6 +208,11 @@ namespace xmlRevise
                     MessageBox.Show("你是不是把bnsdat.exe删了?快还原回来,如果还原不回来了那就重启本软件,我自己搞定 ^0~ ");
                     return;
                 }
+                if (!File.Exists(xmlFilePath + "config.dat"))
+                {
+                    MessageBox.Show("找不到config.dat 请直接在剑灵目录里修改或者将xml.dat和config.dat同时放到一个文件夹中再解包.");
+                    return;
+                }
                 label_Now.Text = "正在解包...";
                 //解包结束并且 client.config2.xml 不是0字节
                 if (OutPutForm_Shown(xmlFilePath, String.Format("{0}{1}", radioButton_E.Checked ? "-e " : "-x ", "xml.dat")) && OutPutForm_Shown(xmlFilePath, String.Format("{0}{1}", radioButton_E.Checked ? "-e " : "-x ", "config.dat")))
@@ -539,12 +544,12 @@ namespace xmlRevise
                 settings.IgnoreComments = true;//忽略文档里面的注释
                 if (!File.Exists(path + "xml.dat.files\\client.config2.xml"))
                 {
-                    MessageBox.Show("找不到 client.config2.xml 请重新解压");
+                    MessageBox.Show("找不到 client.config2.xml 请重新解包");
                     return;
                 }
                 if (!File.Exists(path + "config.dat.files\\system.config2.xml"))
                 {
-                    MessageBox.Show("找不到 system.config2.xml 请重新解压");
+                    MessageBox.Show("找不到 system.config2.xml 请重新解包");
                     return;
                 }
 
@@ -730,12 +735,12 @@ namespace xmlRevise
                 settings.IgnoreComments = true;//忽略文档里面的注释
                 if (!File.Exists(path + "xml.dat.files\\client.config2.xml"))
                 {
-                    MessageBox.Show("找不到 client.config2.xml 请重新解压");
+                    MessageBox.Show("找不到 client.config2.xml 请重新解包");
                     return;
                 }
                 if (!File.Exists(path + "config.dat.files\\system.config2.xml"))
                 {
-                    MessageBox.Show("找不到 system.config2.xml 请重新解压");
+                    MessageBox.Show("找不到 system.config2.xml 请重新解包");
                     return;
                 }
 

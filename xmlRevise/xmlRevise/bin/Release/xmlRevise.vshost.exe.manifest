@@ -4,7 +4,7 @@
   <description asmv2:iconFile="bitbug_favicon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="xmlRevise" version="1.3.1.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="xmlRevise" version="1.3.2.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="xmlRevise.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="xmlRevise.exe" size="3782144">
-      <assemblyIdentity name="xmlRevise" version="1.3.1.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="xmlRevise.exe" size="3782656">
+      <assemblyIdentity name="xmlRevise" version="1.3.2.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>fFt8UxiXStNV0RiqTvJU3rxs22w=</dsig:DigestValue>
+        <dsig:DigestValue>0yFUGZI7OMtHRqRNEqX2ohRE/wY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

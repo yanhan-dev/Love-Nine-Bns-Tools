@@ -103,7 +103,7 @@
             this.groupBox_Step1.Size = new System.Drawing.Size(701, 60);
             this.groupBox_Step1.TabIndex = 2;
             this.groupBox_Step1.TabStop = false;
-            this.groupBox_Step1.Text = "Step1";
+            this.groupBox_Step1.Text = "Step1 选中剑灵 xml.dat config.dat 目录";
             // 
             // button_Open
             // 
