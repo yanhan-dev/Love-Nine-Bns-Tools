@@ -4,7 +4,7 @@
   <description asmv2:iconFile="bitbug_favicon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="LoveNineBnsTools" version="2.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="LoveNineBnsTools" version="2.1.0.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="LoveNineBnsTools.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LoveNineBnsTools.exe" size="274432">
-      <assemblyIdentity name="LoveNineBnsTools" version="2.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LoveNineBnsTools.exe" size="275968">
+      <assemblyIdentity name="LoveNineBnsTools" version="2.1.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ZzI+ZbM2tHy1iBaiRPqOSLzq9jA=</dsig:DigestValue>
+        <dsig:DigestValue>Gj/ZFwzI3RhWAASW9A2SEY3g8N8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

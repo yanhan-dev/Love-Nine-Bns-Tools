@@ -107,7 +107,8 @@ namespace LoveNineBnsTools
             label_Now.Text = "正在恢复...";
             checkBox_Six.Checked = false;
             checkBox_Breast.Checked = false;
-            checkBox_autoBUFF.Checked = true;
+            checkBox_autoBUFF.Checked = false;
+            checkBox_backrun.Checked = false;
             radioButton_Ping100.Select();
             label_Now.Text = "恢复成功!";
 
@@ -292,7 +293,7 @@ namespace LoveNineBnsTools
 
                 xmlRW xml = new xmlRW();
                 int GCD = 100;
-                bool breast = false, damage = false, autobuff = true;
+                bool breast = false, damage = false, autobuff = true, backrun = false;
                 if (checkBox_Breast.Checked)
                 {
                     breast = true;
@@ -301,9 +302,13 @@ namespace LoveNineBnsTools
                 {
                     damage = true;
                 }
-                if (checkBox_autoBUFF.Checked == false)
+                if (checkBox_autoBUFF.Checked == true)
                 {
                     autobuff = false;
+                }
+                if (checkBox_backrun.Checked == true)
+                {
+                    backrun = true;
                 }
                 if (radioButton_Ping100.Checked)
                 {
@@ -335,7 +340,7 @@ namespace LoveNineBnsTools
 
                 }
 
-                xml.xmlWrite(xmlFilePath, GCD, breast, damage, autobuff);
+                xml.xmlWrite(xmlFilePath, GCD, breast, damage, autobuff, backrun);
                 label_Now.Text = "保存完毕";
             }
             catch (Exception e_bt_save)
@@ -374,11 +379,11 @@ namespace LoveNineBnsTools
                 }
                 if (autobuff == true) //BUFF自动排序选择框
                 {
-                    checkBox_autoBUFF.Checked = true;
+                    checkBox_autoBUFF.Checked = false;
                 }
                 else
                 {
-                    checkBox_autoBUFF.Checked = false;
+                    checkBox_autoBUFF.Checked = true;
                 }
                 switch (GCD)
                 {
@@ -573,7 +578,7 @@ namespace LoveNineBnsTools
             /// <param name="GCD">GCD数值(int)</param>
             /// <param name="breast">摇乳是否开启，是为true(bool)</param>
             /// <param name="damage">6人伤害统计是否开启，是为true(bool)</param>
-            public void xmlWrite(string path, int GCD, bool breast, bool damage, bool autoBUFF)
+            public void xmlWrite(string path, int GCD, bool breast, bool damage, bool autoBUFF, bool backRun)
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -740,6 +745,70 @@ namespace LoveNineBnsTools
 
 
                             }
+                        }
+
+                    }
+                    #endregion
+
+                    #region 后退加速
+                    if (xe.GetAttribute("name") == "move")//如果name属性值为“move” 
+                    {
+                        XmlNodeList nls = xe.ChildNodes;//继续获取xe子节点的所有子节点 
+                        foreach (XmlNode xn1 in nls)//遍历 
+                        {
+                            XmlElement xe2 = (XmlElement)xn1;//转换类型 
+                            if (xe2.GetAttribute("name") == "backrun-velocity-pct")//如果找到 
+                            {
+                                try
+                                {
+                                    if (backRun == true) { xe2.SetAttribute("value", "1.200000"); }
+                                    else { xe2.SetAttribute("value", "0.400000"); }
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show(e.ToString());
+                                }
+                            }
+
+                            if (xe2.GetAttribute("name") == "walking-velocity-pct")//如果找到 
+                            {
+                                try
+                                {
+                                    if (backRun == true) { xe2.SetAttribute("value", "0.600000"); }
+                                    else { xe2.SetAttribute("value", "0.300000"); }
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show(e.ToString());
+                                }
+                            }
+
+                            if (xe2.GetAttribute("name") == "backwalking-velocity-pct")//如果找到 
+                            {
+                                try
+                                {
+                                    if (backRun == true) { xe2.SetAttribute("value", "0.220000"); }
+                                    else { xe2.SetAttribute("value", "0.150000"); }
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show(e.ToString());
+                                }
+                            }
+
+                            if (xe2.GetAttribute("name") == "combat-velocity-pct")//如果找到 
+                            {
+                                try
+                                {
+                                    if (backRun == true) { xe2.SetAttribute("value", "0.800000"); }
+                                    else { xe2.SetAttribute("value", "0.800000"); }
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show(e.ToString());
+                                }
+                            }
+                            
                         }
 
                     }

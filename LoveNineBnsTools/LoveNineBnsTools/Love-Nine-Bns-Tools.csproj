@@ -111,6 +111,7 @@
     <EmbeddedResource Include="Resource1.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Love-Nine-Bns-Tools_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
