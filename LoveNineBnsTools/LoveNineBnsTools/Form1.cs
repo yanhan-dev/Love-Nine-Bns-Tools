@@ -362,11 +362,11 @@ namespace LoveNineBnsTools
 
                 if (breast == true) //摇乳选择框
                 {
-                    checkBox_Six.Checked = true;
+                    checkBox_Breast.Checked = true;
                 }
                 else
                 {
-                    checkBox_Six.Checked = false;
+                    checkBox_Breast.Checked = false;
                 }
 
                 if (damage == true) //6人伤害选择框
