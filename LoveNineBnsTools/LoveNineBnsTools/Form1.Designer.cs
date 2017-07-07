@@ -35,27 +35,27 @@
             this.button_Open = new System.Windows.Forms.Button();
             this.textBox_Path = new System.Windows.Forms.TextBox();
             this.groupBox_Step2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox_fight = new System.Windows.Forms.CheckBox();
+            this.checkBox_backrun = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.button_loadProfile = new System.Windows.Forms.Button();
             this.button_resetProfile = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBox_JLG = new System.Windows.Forms.CheckBox();
             this.checkBox_autoBUFF = new System.Windows.Forms.CheckBox();
             this.checkBox_Breast = new System.Windows.Forms.CheckBox();
             this.checkBox_Six = new System.Windows.Forms.CheckBox();
             this.groupBox_Step3 = new System.Windows.Forms.GroupBox();
             this.button_save = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label_Now = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox_backrun = new System.Windows.Forms.CheckBox();
-            this.checkBox_JLG = new System.Windows.Forms.CheckBox();
-            this.checkBox_fight = new System.Windows.Forms.CheckBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox_Step1.SuspendLayout();
             this.groupBox_Step2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox_Step3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_Unpack
@@ -127,6 +127,43 @@
             this.groupBox_Step2.TabStop = false;
             this.groupBox_Step2.Text = "Step2";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBox_fight);
+            this.groupBox1.Controls.Add(this.checkBox_backrun);
+            this.groupBox1.Location = new System.Drawing.Point(398, 20);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(165, 171);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "慎重修改区";
+            // 
+            // checkBox_fight
+            // 
+            this.checkBox_fight.AutoSize = true;
+            this.checkBox_fight.ForeColor = System.Drawing.Color.Red;
+            this.checkBox_fight.Location = new System.Drawing.Point(24, 64);
+            this.checkBox_fight.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_fight.Name = "checkBox_fight";
+            this.checkBox_fight.Size = new System.Drawing.Size(119, 19);
+            this.checkBox_fight.TabIndex = 11;
+            this.checkBox_fight.Text = "开启战斗加速";
+            this.checkBox_fight.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_backrun
+            // 
+            this.checkBox_backrun.AutoSize = true;
+            this.checkBox_backrun.ForeColor = System.Drawing.Color.Red;
+            this.checkBox_backrun.Location = new System.Drawing.Point(24, 33);
+            this.checkBox_backrun.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_backrun.Name = "checkBox_backrun";
+            this.checkBox_backrun.Size = new System.Drawing.Size(119, 19);
+            this.checkBox_backrun.TabIndex = 10;
+            this.checkBox_backrun.Text = "开启后退加速";
+            this.checkBox_backrun.UseVisualStyleBackColor = true;
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.button_loadProfile);
@@ -176,6 +213,17 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "随意修改区";
+            // 
+            // checkBox_JLG
+            // 
+            this.checkBox_JLG.AutoSize = true;
+            this.checkBox_JLG.Location = new System.Drawing.Point(15, 126);
+            this.checkBox_JLG.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox_JLG.Name = "checkBox_JLG";
+            this.checkBox_JLG.Size = new System.Drawing.Size(134, 19);
+            this.checkBox_JLG.TabIndex = 7;
+            this.checkBox_JLG.Text = "开启聚灵阁加速";
+            this.checkBox_JLG.UseVisualStyleBackColor = true;
             // 
             // checkBox_autoBUFF
             // 
@@ -234,16 +282,6 @@
             this.button_save.UseVisualStyleBackColor = true;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(540, 379);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 15);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "By:烟寒";
-            // 
             // label_Now
             // 
             this.label_Now.AutoSize = true;
@@ -254,53 +292,18 @@
             this.label_Now.TabIndex = 7;
             this.label_Now.Text = "等待操作";
             // 
-            // groupBox1
+            // linkLabel1
             // 
-            this.groupBox1.Controls.Add(this.checkBox_fight);
-            this.groupBox1.Controls.Add(this.checkBox_backrun);
-            this.groupBox1.Location = new System.Drawing.Point(398, 20);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(165, 171);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "慎重修改区";
-            // 
-            // checkBox_backrun
-            // 
-            this.checkBox_backrun.AutoSize = true;
-            this.checkBox_backrun.ForeColor = System.Drawing.Color.Red;
-            this.checkBox_backrun.Location = new System.Drawing.Point(24, 33);
-            this.checkBox_backrun.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_backrun.Name = "checkBox_backrun";
-            this.checkBox_backrun.Size = new System.Drawing.Size(119, 19);
-            this.checkBox_backrun.TabIndex = 10;
-            this.checkBox_backrun.Text = "开启后退加速";
-            this.checkBox_backrun.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_JLG
-            // 
-            this.checkBox_JLG.AutoSize = true;
-            this.checkBox_JLG.Location = new System.Drawing.Point(15, 126);
-            this.checkBox_JLG.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_JLG.Name = "checkBox_JLG";
-            this.checkBox_JLG.Size = new System.Drawing.Size(134, 19);
-            this.checkBox_JLG.TabIndex = 7;
-            this.checkBox_JLG.Text = "开启聚灵阁加速";
-            this.checkBox_JLG.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_fight
-            // 
-            this.checkBox_fight.AutoSize = true;
-            this.checkBox_fight.ForeColor = System.Drawing.Color.Red;
-            this.checkBox_fight.Location = new System.Drawing.Point(24, 64);
-            this.checkBox_fight.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox_fight.Name = "checkBox_fight";
-            this.checkBox_fight.Size = new System.Drawing.Size(119, 19);
-            this.checkBox_fight.TabIndex = 11;
-            this.checkBox_fight.Text = "开启战斗加速";
-            this.checkBox_fight.UseVisualStyleBackColor = true;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.linkLabel1.Location = new System.Drawing.Point(531, 379);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(67, 15);
+            this.linkLabel1.TabIndex = 8;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "检查更新";
+            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // Form1
             // 
@@ -310,8 +313,8 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(625, 415);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label_Now);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox_Step3);
             this.Controls.Add(this.groupBox_Step2);
             this.Controls.Add(this.groupBox_Step1);
@@ -323,12 +326,12 @@
             this.groupBox_Step1.ResumeLayout(false);
             this.groupBox_Step1.PerformLayout();
             this.groupBox_Step2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox_Step3.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,7 +350,6 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button button_resetProfile;
         private System.Windows.Forms.GroupBox groupBox_Step3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_Now;
         private System.Windows.Forms.Button button_loadProfile;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -357,6 +359,7 @@
         private System.Windows.Forms.CheckBox checkBox_fight;
         private System.Windows.Forms.CheckBox checkBox_backrun;
         private System.Windows.Forms.CheckBox checkBox_JLG;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 
