@@ -11,14 +11,11 @@ namespace LoveNineBnsTools
 
     public partial class Form1 : Form
     {
-
-
         public static Form1 CurrentForm;
         string xmlFilePath;   //xml文件路径（文件夹）
         string usedfilepath;
         string usedfilepathonly;
         bool BNSis64 = false;
-        static bool GCDChange = true;
         public Process process = null;
         public BackgroundWorker bnsdat;
         public BackgroundWorker bnsdatc;
@@ -42,7 +39,7 @@ namespace LoveNineBnsTools
             init(); //初始化控件
 
             //初始化运行环境
-            if(!releaseIonic())
+            if (!releaseIonic())
             {
                 MessageBox.Show("无法初始化运行环境，请右键点击本程序 以管理员身份运行");
             }
@@ -51,7 +48,7 @@ namespace LoveNineBnsTools
 
         #region 启用禁用相关按钮
         /// <summary>
-        /// Enable 所有 button
+        /// 启用所有按钮
         /// </summary>
         private void initEnable()
         {
@@ -62,12 +59,12 @@ namespace LoveNineBnsTools
             button_save.Enabled = true;
             button_Pack.Enabled = true;
             groupBox3.Enabled = true;
-            groupBox5.Enabled = true;
             groupBox6.Enabled = true;
+            groupBox1.Enabled = true;
         }
 
         /// <summary>
-        /// Disable some button
+        /// 禁用相关按钮
         /// </summary>
         private void initDisable()
         {
@@ -76,8 +73,8 @@ namespace LoveNineBnsTools
             button_save.Enabled = false;
             button_Pack.Enabled = false;        //禁用“打包”按钮
             groupBox3.Enabled = false;
-            groupBox5.Enabled = false;
             groupBox6.Enabled = false;
+            groupBox1.Enabled = false;
 
         }
 
@@ -92,8 +89,8 @@ namespace LoveNineBnsTools
             button_save.Enabled = false;
             button_Pack.Enabled = false;        //禁用“打包”按钮
             groupBox3.Enabled = false;
-            groupBox5.Enabled = false;
             groupBox6.Enabled = false;
+            groupBox1.Enabled = false;
 
         }
         #endregion
@@ -109,48 +106,10 @@ namespace LoveNineBnsTools
             checkBox_Breast.Checked = false;
             checkBox_autoBUFF.Checked = false;
             checkBox_backrun.Checked = false;
-            radioButton_Ping100.Select();
+            checkBox_fight.Checked = false;
+            checkBox_JLG.Checked = false;
             label_Now.Text = "恢复成功!";
 
-        }
-        #endregion
-
-        #region bnsdat.exe操作事件
-        /// <summary>
-        /// bnsdat.exe操作事件
-        /// </summary>
-        private bool OutPutForm_Shown(string path, string arg)
-        {
-            try
-            {
-                Process p = new Process();
-                p.StartInfo.FileName = "bnsdat.exe";
-
-                p.StartInfo.WorkingDirectory = path;
-
-                p.StartInfo.Arguments = arg;
-
-                p.Start();
-
-                //p.StandardInput.WriteLine("bnsdat.exe");
-
-                //p.StandardInput.WriteLine("exit");
-
-                while (!p.HasExited)
-                {
-
-                    p.WaitForExit();
-
-                }
-
-                //int returnValue = p.ExitCode;
-                return true;
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.ToString(), "bnsdat操作事件");
-                return false;
-            }
         }
         #endregion
 
@@ -178,16 +137,6 @@ namespace LoveNineBnsTools
                 xmlFilePath = RemoveRight(ofd.FileName, 7);//末尾去掉“xml.dat”
                 textBox_Path.Text = ofd.FileName;
 
-                //第一次运行释放bnsdat.exe
-                //if (firstRun)
-                //{
-                //    if (releaseBnsdatExe())
-                //    {
-                //        firstRun = false;
-                //    }
-
-                //}
-
                 button_Unpack.Enabled = true; //启用解包按钮
 
                 if (File.Exists(xmlFilePath + "xml.dat.files\\client.config2.xml")) //未解包，已存在配置文件
@@ -200,7 +149,6 @@ namespace LoveNineBnsTools
 
                         return;
                     }
-
                 }
                 //解包失败
                 initDisable();
@@ -225,49 +173,37 @@ namespace LoveNineBnsTools
             try
             {
                 initDisable();
-                if (!File.Exists(xmlFilePath + "config.dat"))
+                if (!File.Exists(xmlFilePath + "xml.dat"))
                 {
-                    MessageBox.Show("找不到config.dat 请直接在剑灵目录里修改或者将xml.dat和config.dat同时放到一个文件夹中再解包.");
+                    MessageBox.Show("我的天，发生了什么？ xml.dat 怎么没了？");
                     return;
                 }
+
                 label_Now.Text = "正在解包...";
-
-
-                //解包config.dat
-                usedfilepath = xmlFilePath + "config.dat";
-                Extractor(usedfilepath);
 
                 //解包xml.dat
                 usedfilepath = xmlFilePath + "xml.dat";
                 Extractor(usedfilepath);
 
-                if (File.Exists(xmlFilePath + "xml.dat.files\\client.config2.xml") && File.Exists(xmlFilePath + "config.dat.files\\system.config2.xml"))
+                if (File.Exists(xmlFilePath + "xml.dat.files\\client.config2.xml"))
                 {
                     FileInfo xmldat = new FileInfo(xmlFilePath + "xml.dat.files\\client.config2.xml");
-                    FileInfo configdat = new FileInfo(xmlFilePath + "xml.dat.files\\client.config2.xml");
-                    if (xmldat.Length != 0 && configdat.Length != 0)
+                    if (xmldat.Length != 0)
                     {
                         label_Now.Text = "解包完成。";
                         initEnable();
                         button_loadProfile.PerformClick(); //解包完成自动点击载入按钮,
                         return;
                     }
-                    else
-                    {
-                        MessageBox.Show("解包失败，请联系作者QQ:852932673。", "解包失败");
-                        return;
-                    }
                 }
-
-
-
-
                 label_Now.Text = "解包失败。";
-                MessageBox.Show("解包失败");
+                MessageBox.Show("解包失败，请重新解包，有问题请联系作者QQ:852932673。", "解包失败");
+                return;
+
             }//总try结束
             catch (Exception e_bt_unpack)
             {
-                MessageBox.Show(e_bt_unpack.ToString(), "解包按钮错误");
+                MessageBox.Show("请将以下内容截图反馈给作者QQ852932673\r\n" + e_bt_unpack.ToString(), "解包错误");
             }
         }
 
@@ -280,20 +216,8 @@ namespace LoveNineBnsTools
             {
                 label_Now.Text = "正在保存...";
 
-                //是否启用本地修改GCD
-                if (radioButton_Ping100.Checked)
-                {
-                    GCDChange = false;
-                }
-                else
-                {
-                    GCDChange = true;
-                }
-
-
                 xmlRW xml = new xmlRW();
-                int GCD = 100;
-                bool breast = false, damage = false, autobuff = true, backrun = false;
+                bool breast = false, damage = false, autobuff = true, backRun = false, fight = false, JLG = false;
                 if (checkBox_Breast.Checked)
                 {
                     breast = true;
@@ -308,39 +232,18 @@ namespace LoveNineBnsTools
                 }
                 if (checkBox_backrun.Checked == true)
                 {
-                    backrun = true;
+                    backRun = true;
                 }
-                if (radioButton_Ping100.Checked)
+                if (checkBox_fight.Checked == true)
                 {
-                    GCD = 100;
+                    fight = true;
                 }
-                else if (radioButton_Ping150.Checked)
+                if (checkBox_JLG.Checked == true)
                 {
-                    GCD = 150;
-                }
-                else if (radioButton_Ping180.Checked)
-                {
-                    GCD = 180;
-                }
-                else if (radioButton_Ping200.Checked)
-                {
-                    GCD = 200;
-                }
-                else if (radioButton_Input.Checked)
-                {
-                    try
-                    {
-                        GCD = Convert.ToInt32(textBox_Ping.Text);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("GCD输入错误，请输入（100-255）之间的整数");
-                        return;
-                    }
-
+                    JLG = true;
                 }
 
-                xml.xmlWrite(xmlFilePath, GCD, breast, damage, autobuff, backrun);
+                xml.xmlWrite(xmlFilePath, breast, damage, autobuff, backRun, fight, JLG);
                 label_Now.Text = "保存完毕";
             }
             catch (Exception e_bt_save)
@@ -356,9 +259,8 @@ namespace LoveNineBnsTools
             try
             {
                 xmlRW xml = new xmlRW();
-                int GCD;
-                bool breast, damage, autobuff;
-                xml.xmlRead(xmlFilePath, out GCD, out breast, out damage, out autobuff);
+                bool breast, damage, autobuff, backRun, fight, JLG;
+                xml.xmlRead(xmlFilePath, out breast, out damage, out autobuff, out backRun, out fight, out JLG);
 
                 if (breast == true) //摇乳选择框
                 {
@@ -385,26 +287,32 @@ namespace LoveNineBnsTools
                 {
                     checkBox_autoBUFF.Checked = true;
                 }
-                switch (GCD)
+                if (backRun == true) //后退加速
                 {
-                    case 100:
-                        radioButton_Ping100.Checked = true;
-                        break;
-                    case 150:
-                        radioButton_Ping150.Checked = true;
-                        break;
-                    case 180:
-                        radioButton_Ping180.Checked = true;
-                        break;
-                    case 200:
-                        radioButton_Ping200.Checked = true;
-                        break;
-                    default:
-                        radioButton_Input.Checked = true;
-                        textBox_Ping.Enabled = true;
-                        textBox_Ping.Text = GCD.ToString();
-                        break;
+                    checkBox_backrun.Checked = true;
                 }
+                else
+                {
+                    checkBox_backrun.Checked = false;
+                }
+                if (fight == true) //战斗加速
+                {
+                    checkBox_fight.Checked = true;
+                }
+                else
+                {
+                    checkBox_fight.Checked = false;
+                }
+                if (JLG == true) //聚灵阁加速
+                {
+                    checkBox_JLG.Checked = true;
+                }
+                else
+                {
+                    checkBox_JLG.Checked = false;
+                }
+
+
                 label_Now.Text = "载入成功！";
             }
             catch (Exception e_load)
@@ -413,44 +321,6 @@ namespace LoveNineBnsTools
                 label_Now.Text = "载入失败！";
             }
 
-        }
-        #endregion
-
-        #region GCD 选择编辑框 点击事件
-        private void textBox_Ping_Click(object sender, EventArgs e)
-        {
-            if (textBox_Ping.Text == "自定义")
-                textBox_Ping.Text = "";
-        }
-
-        private void radioButton_Input_Click(object sender, EventArgs e)
-        {
-            textBox_Ping.Enabled = true;
-            textBox_Ping.Text = "自定义";
-        }
-
-        private void radioButton_Ping100_Click(object sender, EventArgs e)
-        {
-            textBox_Ping.Enabled = false;
-            textBox_Ping.Text = "自定义";
-        }
-
-        private void radioButton_Ping150_Click(object sender, EventArgs e)
-        {
-            textBox_Ping.Enabled = false;
-            textBox_Ping.Text = "自定义";
-        }
-
-        private void radioButton_Ping180_CheckedChanged(object sender, EventArgs e)
-        {
-            textBox_Ping.Enabled = false;
-            textBox_Ping.Text = "自定义";
-        }
-
-        private void radioButton_Ping200_CheckedChanged(object sender, EventArgs e)
-        {
-            textBox_Ping.Enabled = false;
-            textBox_Ping.Text = "自定义";
         }
         #endregion
 
@@ -473,17 +343,13 @@ namespace LoveNineBnsTools
         {
             try
             {
-                if (Backup_xml_config())//打包之前先备份xml
+                if (Backup_xml())//打包之前先备份xml
                 {
                     initDisable();
                     label_Now.Text = "正在打包...";
 
-                    if (Directory.Exists(xmlFilePath + "config.dat.files") && Directory.Exists(xmlFilePath + "xml.dat.files"))
+                    if (Directory.Exists(xmlFilePath + "xml.dat.files"))
                     {
-                        usedfilepathonly = xmlFilePath + "config.dat.files";
-                        label_Now.Text = "正在打包config.dat...";
-                        Compiler(usedfilepathonly);
-
                         usedfilepathonly = xmlFilePath + "xml.dat.files";
                         label_Now.Text = "正在打包xml.dat...";
                         Compiler(usedfilepathonly);
@@ -513,10 +379,10 @@ namespace LoveNineBnsTools
         }
         #endregion
 
-        #region 备份xml.dat config.dat
-        private bool Backup_xml_config()
+        #region 备份xml.dat
+        private bool Backup_xml()
         {
-            if (File.Exists(xmlFilePath + "xml.dat") && File.Exists(xmlFilePath + "config.dat"))
+            if (File.Exists(xmlFilePath + "xml.dat"))
             {
                 try
                 {
@@ -524,18 +390,14 @@ namespace LoveNineBnsTools
                     {
                         Directory.CreateDirectory(xmlFilePath + "备份");
                     }
-                    DateTime nowTime = DateTime.Now; //获取当前系统时间
-                    File.Copy(xmlFilePath + "xml.dat", xmlFilePath + "备份\\xml.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
-                    File.Copy(xmlFilePath + "config.dat", xmlFilePath + "备份\\config.dat." + nowTime.ToString("HH_mm_ss")); //开始拷贝
+                    File.Copy(xmlFilePath + "xml.dat", xmlFilePath + "备份\\xml.dat", true); //开始拷贝
                     return true;
                 }
                 catch (Exception e) //拷贝出错
                 {
-                    MessageBox.Show(e.ToString(), "备份出错");
-
+                    MessageBox.Show(e.ToString());
                 }
             }
-            MessageBox.Show("备份出错,文件不存在");
             return false;
         }
         #endregion
@@ -572,13 +434,12 @@ namespace LoveNineBnsTools
             }
             #region xmlWrite
             /// <summary>
-            /// 读取GCD数值 摇乳是否开启 6人伤害统计是否开启
+            /// 读取 摇乳是否开启 6人伤害统计是否开启
             /// </summary>
             /// <param name="path">xmlFilePath路径</param>
-            /// <param name="GCD">GCD数值(int)</param>
             /// <param name="breast">摇乳是否开启，是为true(bool)</param>
             /// <param name="damage">6人伤害统计是否开启，是为true(bool)</param>
-            public void xmlWrite(string path, int GCD, bool breast, bool damage, bool autoBUFF, bool backRun)
+            public void xmlWrite(string path, bool breast, bool damage, bool autoBUFF, bool backRun, bool fight, bool JLG)
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -588,49 +449,6 @@ namespace LoveNineBnsTools
                     MessageBox.Show("找不到 client.config2.xml 请重新解包");
                     return;
                 }
-                if (!File.Exists(path + "config.dat.files\\system.config2.xml"))
-                {
-                    MessageBox.Show("找不到 system.config2.xml 请重新解包");
-                    return;
-                }
-
-
-                #region system.config2.xml 修改区
-                /*  system.config2.xml  修改区 开始 */
-
-                XmlReader reader_config = XmlReader.Create(path + "config.dat.files\\system.config2.xml", settings);
-                xmlDoc.Load(reader_config);
-                XmlNodeList nodeList_NT = xmlDoc.SelectSingleNode("config").ChildNodes;//获取config节点的所有子节点
-
-                foreach (XmlNode xn_NT in nodeList_NT)//遍历所有子节点 
-                {
-
-                    XmlElement xe_NT = (XmlElement)xn_NT;//将子节点类型转换为XmlElement类型
-                    if (xe_NT.GetAttribute("name") == "use-auto-bias-global-cool-time")//如果找到 
-                    {
-                        try
-                        {
-                            if (GCDChange)
-                            {
-                                xe_NT.SetAttribute("value", "false"); //设置启用本地GCD (禁用服务器GCD)
-                            }
-                            else
-                            {
-                                xe_NT.SetAttribute("value", "true");
-                            }
-
-                        }
-                        catch (Exception e)
-                        {
-                            MessageBox.Show("EnableGCD" + e.ToString());
-                        }
-                    }
-                }
-                reader_config.Close();
-                xmlDoc.Save(path + "config.dat.files\\system.config2.xml");
-
-                /*  system.config2.xml  修改区 结束 */
-                #endregion
 
                 #region client.config2.xml 修改区
                 /*  client.config2.xml  修改区 开始 */
@@ -643,30 +461,6 @@ namespace LoveNineBnsTools
                 {
 
                     XmlElement xe = (XmlElement)xn;//将子节点类型转换为XmlElement类型 
-
-                    #region GCD
-                    if (xe.GetAttribute("name") == "skill")//如果name属性值为 
-                    {
-
-                        XmlNodeList nls = xe.ChildNodes;//继续获取xe子节点的所有子节点 
-                        foreach (XmlNode xn1 in nls)//遍历 
-                        {
-                            XmlElement xe2 = (XmlElement)xn1;//转换类型 
-                            if (xe2.GetAttribute("name") == "skill-global-cool-latency-time")//如果找到 
-                            {
-                                try
-                                {
-                                    xe2.SetAttribute("value", GCD.ToString()); //Set当前节点值
-                                }
-                                catch (Exception e)
-                                {
-                                    MessageBox.Show(e.ToString());
-                                }
-                            }
-                        }
-
-                    }
-                    #endregion
 
                     #region 摇乳
                     if (xe.GetAttribute("name") == "uncategorized")//如果name属性值为“skill” 
@@ -750,18 +544,20 @@ namespace LoveNineBnsTools
                     }
                     #endregion
 
-                    #region 后退加速
+                    #region 移动加速
                     if (xe.GetAttribute("name") == "move")//如果name属性值为“move” 
                     {
                         XmlNodeList nls = xe.ChildNodes;//继续获取xe子节点的所有子节点 
                         foreach (XmlNode xn1 in nls)//遍历 
                         {
                             XmlElement xe2 = (XmlElement)xn1;//转换类型 
+
+                            #region 后退加速
                             if (xe2.GetAttribute("name") == "backrun-velocity-pct")//如果找到 
                             {
                                 try
                                 {
-                                    if (backRun == true) { xe2.SetAttribute("value", "1.200000"); }
+                                    if (backRun == true) { xe2.SetAttribute("value", "1.400000"); }
                                     else { xe2.SetAttribute("value", "0.400000"); }
                                 }
                                 catch (Exception e)
@@ -774,7 +570,7 @@ namespace LoveNineBnsTools
                             {
                                 try
                                 {
-                                    if (backRun == true) { xe2.SetAttribute("value", "0.600000"); }
+                                    if (backRun == true) { xe2.SetAttribute("value", "1.400000"); }
                                     else { xe2.SetAttribute("value", "0.300000"); }
                                 }
                                 catch (Exception e)
@@ -787,7 +583,7 @@ namespace LoveNineBnsTools
                             {
                                 try
                                 {
-                                    if (backRun == true) { xe2.SetAttribute("value", "0.220000"); }
+                                    if (backRun == true) { xe2.SetAttribute("value", "1.300000"); }
                                     else { xe2.SetAttribute("value", "0.150000"); }
                                 }
                                 catch (Exception e)
@@ -795,12 +591,14 @@ namespace LoveNineBnsTools
                                     MessageBox.Show(e.ToString());
                                 }
                             }
+                            #endregion
 
+                            #region 战斗状态加速
                             if (xe2.GetAttribute("name") == "combat-velocity-pct")//如果找到 
                             {
                                 try
                                 {
-                                    if (backRun == true) { xe2.SetAttribute("value", "0.800000"); }
+                                    if (fight == true) { xe2.SetAttribute("value", "1.200000"); }
                                     else { xe2.SetAttribute("value", "0.800000"); }
                                 }
                                 catch (Exception e)
@@ -808,7 +606,44 @@ namespace LoveNineBnsTools
                                     MessageBox.Show(e.ToString());
                                 }
                             }
-                            
+                            #endregion
+
+                        }
+
+                    }
+                    #endregion
+
+                    #region 聚灵阁加速
+                    if (xe.GetAttribute("name") == "random-store")//如果name属性值为 
+                    {
+                        XmlNodeList nls = xe.ChildNodes;//继续获取xe子节点的所有子节点 
+                        foreach (XmlNode xn1 in nls)//遍历 
+                        {
+                            XmlElement xe2 = (XmlElement)xn1;//转换类型 
+                            if (xe2.GetAttribute("name") == "progress-duration")//如果找到 
+                            {
+                                try
+                                {
+                                    if (JLG == true) { xe2.SetAttribute("value", "0.01"); }  //Set当前节点值
+                                    else { xe2.SetAttribute("value", "2.0"); }
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show(e.ToString());
+                                }
+                            }
+                            if (xe2.GetAttribute("name") == "slot-update-delay")//如果找到 
+                            {
+                                try
+                                {
+                                    if (JLG == true) { xe2.SetAttribute("value", "0.01"); }  //Set当前节点值
+                                    else { xe2.SetAttribute("value", "0.2"); }
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show(e.ToString());
+                                }
+                            }
                         }
 
                     }
@@ -827,20 +662,23 @@ namespace LoveNineBnsTools
 
             #region xmlRead
             /// <summary>
-            /// 读取GCD数值 摇乳是否开启 6人伤害统计是否开启
+            /// 读取 摇乳是否开启 6人伤害统计是否开启
             /// </summary>
             /// <param name="path">xmlFilePath路径</param>
-            /// <param name="GCD">GCD数值(int)</param>
             /// <param name="breast">摇乳是否开启，是为true(bool)</param>
             /// <param name="damage">6人伤害统计是否开启，是为true(bool)</param>
-            public void xmlRead(string path, out int GCD, out bool breast, out bool damage, out bool autoBUFF)
+            public void xmlRead(string path, out bool breast, out bool damage, out bool autoBUFF, out bool backRun, out bool fight, out bool JLG)
             {
-                GCD = 100;
                 breast = false;
                 damage = false;
                 autoBUFF = true;
+                backRun = false;
+                fight = false;
+                JLG = false;
 
-                string[] returnValues = new string[4];
+                string[] returnValues = new string[3];
+                string[] returnMoves = new string[4];
+                string[] returnJLG = new string[2];
                 XmlDocument xmlDoc = new XmlDocument();
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;//忽略文档里面的注释
@@ -849,13 +687,6 @@ namespace LoveNineBnsTools
                     MessageBox.Show("找不到 client.config2.xml 请重新解包");
                     return;
                 }
-                if (!File.Exists(path + "config.dat.files\\system.config2.xml"))
-                {
-                    MessageBox.Show("找不到 system.config2.xml 请重新解包");
-                    return;
-                }
-
-
 
                 /*  client.config2.xml  修改区 开始 */
                 XmlReader reader = XmlReader.Create(path + "xml.dat.files\\client.config2.xml", settings);
@@ -867,31 +698,6 @@ namespace LoveNineBnsTools
                 {
 
                     XmlElement xe = (XmlElement)xn;//将子节点类型转换为XmlElement类型 
-
-                    #region GCD延时
-                    if (xe.GetAttribute("name") == "skill")//如果name属性值为“skill” 
-                    {
-
-
-                        XmlNodeList nls = xe.ChildNodes;//继续获取xe子节点的所有子节点 
-                        foreach (XmlNode xn1 in nls)//遍历 
-                        {
-                            XmlElement xe2 = (XmlElement)xn1;//转换类型 
-                            if (xe2.GetAttribute("name") == "skill-global-cool-latency-time")//如果找到 
-                            {
-                                try
-                                {
-                                    returnValues[0] = xe2.GetAttribute("value"); //获取当前节点值
-                                }
-                                catch (Exception e)
-                                {
-                                    MessageBox.Show("GCD" + e.ToString());
-                                }
-                            }
-                        }
-
-                    }
-                    #endregion
 
                     #region 摇乳
                     if (xe.GetAttribute("name") == "uncategorized")//如果name属性值为
@@ -959,7 +765,7 @@ namespace LoveNineBnsTools
                                     {
                                         try
                                         {
-                                            returnValues[3] = xe3.GetAttribute("value"); //获取当前节点值
+                                            returnValues[0] = xe3.GetAttribute("value"); //获取当前节点值
                                         }
                                         catch (Exception e)
                                         {
@@ -975,98 +781,133 @@ namespace LoveNineBnsTools
 
                     }
                     #endregion
+
+                    #region 移动速度
+                    if (xe.GetAttribute("name") == "move")//如果name属性值为
+                    {
+                        XmlNodeList nls = xe.ChildNodes;//继续获取xe子节点的所有子节点 
+                        foreach (XmlNode xn1 in nls)//遍历 
+                        {
+                            XmlElement xe2 = (XmlElement)xn1;//转换类型 
+                            if (xe2.GetAttribute("name") == "backrun-velocity-pct")//如果找到 
+                            {
+                                try
+                                {
+                                    returnMoves[0] = xe2.GetAttribute("value"); //获取当前节点值
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show("后退加速0" + e.ToString());
+                                }
+                            }
+
+                            if (xe2.GetAttribute("name") == "walking-velocity-pct")//如果找到 
+                            {
+                                try
+                                {
+                                    returnMoves[1] = xe2.GetAttribute("value"); //获取当前节点值
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show("后退加速1" + e.ToString());
+                                }
+                            }
+
+                            if (xe2.GetAttribute("name") == "backwalking-velocity-pct")//如果找到 
+                            {
+                                try
+                                {
+                                    returnMoves[2] = xe2.GetAttribute("value"); //获取当前节点值
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show("后退加速2" + e.ToString());
+                                }
+                            }
+
+                            if (xe2.GetAttribute("name") == "combat-velocity-pct")//如果找到 
+                            {
+                                try
+                                {
+                                    returnMoves[3] = xe2.GetAttribute("value"); //获取当前节点值
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show("后退加速3" + e.ToString());
+                                }
+                            }
+
+                        }
+
+                    }
+                    #endregion
+
+                    #region 聚灵阁加速
+                    if (xe.GetAttribute("name") == "random-store")//如果name属性值为“skill” 
+                    {
+
+
+                        XmlNodeList nls = xe.ChildNodes;//继续获取xe子节点的所有子节点 
+                        foreach (XmlNode xn1 in nls)//遍历 
+                        {
+                            XmlElement xe2 = (XmlElement)xn1;//转换类型 
+                            if (xe2.GetAttribute("name") == "progress-duration")//如果找到 
+                            {
+                                try
+                                {
+                                    returnJLG[0] = xe2.GetAttribute("value"); //获取当前节点值
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show("聚灵阁" + e.ToString());
+                                }
+                            }
+                            if (xe2.GetAttribute("name") == "slot-update-delay")//如果找到 
+                            {
+                                try
+                                {
+                                    returnJLG[1] = xe2.GetAttribute("value"); //获取当前节点值
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show("聚灵阁" + e.ToString());
+                                }
+                            }
+                        }
+
+                    }
+                    #endregion
                 }//foreach 遍历所有子节点 结束
 
                 /*  client.config2.xml  修改区 结束 */
 
 
 
-                /*   返回GCD值为int32型   */
-                try
-                {
-                    GCD = Convert.ToInt32(returnValues[0]); //out GCD值
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.ToString());
-                    reader.Close();
-                    return;
-                }
+                /*  返回摇乳是否开启，开启返回true，未开启返回false  */
+                if (returnValues[1] == "true") { breast = false; }
+                else { breast = true; }
 
-                /*  返回摇乳是否开启，开启返回true，未开启返回false，数据损坏返回false  */
-                try
-                {
-                    if (returnValues[1] == "true")
-                    {
-                        breast = false;
-                    }
-                    else if (returnValues[1] == "false")
-                    {
-                        breast = true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("数据损坏，请重新解包后再进行修改", "摇乳");
-                        reader.Close();
-                        return;
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.ToString());
-                    reader.Close();
-                    return;
-                }
+                /*  返回6人伤害统计是否开启，开启返回true，未开启返回false */
+                if (returnValues[2] == "y") { damage = true; }
+                else { damage = false; }
 
-                /*  返回6人伤害统计是否开启，开启返回true，未开启返回false，数据损坏返回false  */
-                try
-                {
-                    if (returnValues[2] == "n")
-                    {
-                        damage = false;
-                    }
-                    else if (returnValues[2] == "y")
-                    {
-                        damage = true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("数据损坏，请重新解包后再进行修改", "6人伤害");
-                        reader.Close();
-                        return;
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.ToString());
-                    reader.Close();
-                    return;
-                }
+                /*  返回技能自动排序是否开启，开启返回true，未开启返回false */
+                if (returnValues[0] == "n") { autoBUFF = false; }
+                else { autoBUFF = true; }
 
-                /*  返回技能自动排序是否开启，开启返回true，未开启返回false，数据损坏返回false*/
-                try
-                {
-                    if (returnValues[3] == "n")
-                    {
-                        autoBUFF = false;
-                    }
-                    else if (returnValues[3] == "y")
-                    {
-                        autoBUFF = true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("数据损坏，请重新解包后再进行修改", "技能排序");
-                        reader.Close();
-                        return;
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.ToString());
-                    reader.Close();
-                    return;
-                }
+                /* 返回后退加速是否开启 */
+                if (Convert.ToDouble(returnMoves[0]) > 0.4 || Convert.ToDouble(returnMoves[1]) > 0.3 || Convert.ToDouble(returnMoves[2]) > 0.15)
+                { backRun = true; }
+                else { backRun = false; }
+
+                /* 返回战斗加速是否开启 */
+                if (Convert.ToDouble(returnMoves[3]) > 0.8) { fight = true; }
+                else { fight = false; }
+
+                /* 返回聚灵阁加速是否开启 */
+                if (Convert.ToDouble(returnJLG[0]) < 2.0 || Convert.ToDouble(returnJLG[1]) < 0.2) { JLG = true; }
+                else { JLG = false; }
+
 
                 reader.Close();
             }

@@ -18,3 +18,11 @@ G:\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\obj\Debug\LoveNineBnsTo
 G:\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\obj\Debug\LoveNineBnsTools.application
 G:\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\obj\Debug\LoveNineBnsTools.exe
 G:\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\obj\Debug\LoveNineBnsTools.pdb
+D:\GitHub\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\bin\Debug\LoveNineBnsTools.exe.manifest
+D:\GitHub\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\bin\Debug\LoveNineBnsTools.application
+D:\GitHub\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\bin\Debug\LoveNineBnsTools.exe
+D:\GitHub\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\bin\Debug\LoveNineBnsTools.pdb
+D:\GitHub\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\obj\Debug\LoveNineBnsTools.exe.manifest
+D:\GitHub\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\obj\Debug\LoveNineBnsTools.application
+D:\GitHub\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\obj\Debug\LoveNineBnsTools.exe
+D:\GitHub\Love-Nine-Bns-Tools\LoveNineBnsTools\LoveNineBnsTools\obj\Debug\LoveNineBnsTools.pdb
