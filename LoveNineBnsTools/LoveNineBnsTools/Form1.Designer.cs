@@ -42,7 +42,6 @@
             this.button_loadProfile = new System.Windows.Forms.Button();
             this.button_resetProfile = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.checkBox_JLG = new System.Windows.Forms.CheckBox();
             this.checkBox_autoBUFF = new System.Windows.Forms.CheckBox();
             this.checkBox_Breast = new System.Windows.Forms.CheckBox();
             this.checkBox_Six = new System.Windows.Forms.CheckBox();
@@ -50,7 +49,8 @@
             this.button_save = new System.Windows.Forms.Button();
             this.label_Now = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.checkBox_ZuiJiaXingNeng = new System.Windows.Forms.CheckBox();
+            this.cbGCD = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox_Step1.SuspendLayout();
             this.groupBox_Step2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -122,6 +122,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cbGCD);
             this.groupBox1.Controls.Add(this.checkBox_fight);
             this.groupBox1.Controls.Add(this.checkBox_backrun);
             this.groupBox1.Location = new System.Drawing.Point(318, 16);
@@ -186,8 +188,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.checkBox_ZuiJiaXingNeng);
-            this.groupBox3.Controls.Add(this.checkBox_JLG);
             this.groupBox3.Controls.Add(this.checkBox_autoBUFF);
             this.groupBox3.Controls.Add(this.checkBox_Breast);
             this.groupBox3.Controls.Add(this.checkBox_Six);
@@ -197,16 +197,6 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "随意修改区";
-            // 
-            // checkBox_JLG
-            // 
-            this.checkBox_JLG.AutoSize = true;
-            this.checkBox_JLG.Location = new System.Drawing.Point(12, 89);
-            this.checkBox_JLG.Name = "checkBox_JLG";
-            this.checkBox_JLG.Size = new System.Drawing.Size(108, 16);
-            this.checkBox_JLG.TabIndex = 7;
-            this.checkBox_JLG.Text = "开启聚灵阁加速";
-            this.checkBox_JLG.UseVisualStyleBackColor = true;
             // 
             // checkBox_autoBUFF
             // 
@@ -282,15 +272,35 @@
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // checkBox_ZuiJiaXingNeng
+            // cbGCD
             // 
-            this.checkBox_ZuiJiaXingNeng.AutoSize = true;
-            this.checkBox_ZuiJiaXingNeng.Location = new System.Drawing.Point(12, 112);
-            this.checkBox_ZuiJiaXingNeng.Name = "checkBox_ZuiJiaXingNeng";
-            this.checkBox_ZuiJiaXingNeng.Size = new System.Drawing.Size(120, 16);
-            this.checkBox_ZuiJiaXingNeng.TabIndex = 8;
-            this.checkBox_ZuiJiaXingNeng.Text = "开启最佳性能模式";
-            this.checkBox_ZuiJiaXingNeng.UseVisualStyleBackColor = true;
+            this.cbGCD.FormattingEnabled = true;
+            this.cbGCD.Items.AddRange(new object[] {
+            "100",
+            "130",
+            "150",
+            "170",
+            "190",
+            "200",
+            "210",
+            "220",
+            "230",
+            "240",
+            "250"});
+            this.cbGCD.Location = new System.Drawing.Point(19, 74);
+            this.cbGCD.Name = "cbGCD";
+            this.cbGCD.Size = new System.Drawing.Size(64, 20);
+            this.cbGCD.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(89, 78);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(23, 12);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "GCD";
             // 
             // Form1
             // 
@@ -307,7 +317,7 @@
             this.Controls.Add(this.groupBox_Step1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "爱玖剑灵助手  2.3.0";
+            this.Text = "爱玖剑灵助手 175剑灵专用";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox_Step1.ResumeLayout(false);
             this.groupBox_Step1.PerformLayout();
@@ -344,9 +354,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox_fight;
         private System.Windows.Forms.CheckBox checkBox_backrun;
-        private System.Windows.Forms.CheckBox checkBox_JLG;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.CheckBox checkBox_ZuiJiaXingNeng;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbGCD;
     }
 }
 

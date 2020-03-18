@@ -22,7 +22,7 @@ namespace LoveNineBnsTools
         /// <param name="path">xmlFilePath路径</param>
         /// <param name="breast">摇乳是否开启，是为true(bool)</param>
         /// <param name="damage">6人伤害统计是否开启，是为true(bool)</param>
-        public void xmlWrite(string path, bool breast, bool damage, bool autoBUFF, bool backRun, bool fight, bool JLG, bool ZJXN)
+        public void xmlWrite(string path, bool breast, bool damage, bool autoBUFF, bool backRun, bool fight, int GCD)
         {
             if (!File.Exists(path + "xml.dat.files\\client.config2.xml"))
             {
@@ -197,31 +197,19 @@ namespace LoveNineBnsTools
                 }
                 #endregion
 
-                #region 聚灵阁加速
-                if (xe.GetAttribute("name") == "random-store")//如果name属性值为 
+                #region GCD
+                if (xe.GetAttribute("name") == "skill")//如果name属性值为 
                 {
+
                     XmlNodeList nls = xe.ChildNodes;//继续获取xe子节点的所有子节点 
                     foreach (XmlNode xn1 in nls)//遍历 
                     {
                         XmlElement xe2 = (XmlElement)xn1;//转换类型 
-                        if (xe2.GetAttribute("name") == "progress-duration")//如果找到 
+                        if (xe2.GetAttribute("name") == "skill-global-cool-latency-time")//如果找到 
                         {
                             try
                             {
-                                if (JLG == true) { xe2.SetAttribute("value", "0.01"); }  //Set当前节点值
-                                else { xe2.SetAttribute("value", "2.0"); }
-                            }
-                            catch (Exception e)
-                            {
-                                MessageBox.Show(e.ToString());
-                            }
-                        }
-                        if (xe2.GetAttribute("name") == "slot-update-delay")//如果找到 
-                        {
-                            try
-                            {
-                                if (JLG == true) { xe2.SetAttribute("value", "0.01"); }  //Set当前节点值
-                                else { xe2.SetAttribute("value", "0.2"); }
+                                xe2.SetAttribute("value", GCD.ToString()); //Set当前节点值
                             }
                             catch (Exception e)
                             {
@@ -232,31 +220,6 @@ namespace LoveNineBnsTools
 
                 }
                 #endregion
-
-                #region 最佳性能模式
-                if (xe.GetAttribute("name") == "option")
-                {
-                    XmlNodeList nls = xe.ChildNodes;//继续获取xe子节点的所有子节点 
-                    foreach (XmlNode xn1 in nls)//遍历 
-                    {
-                        XmlElement xe2 = (XmlElement)xn1;//转换类型 
-                        if (xe2.GetAttribute("name") == "use-optimal-performance-mode-option")//如果找到 
-                        {
-                            try
-                            {
-                                if (ZJXN == true) { xe2.SetAttribute("value", "true"); }  //Set当前节点值
-                                else { xe2.SetAttribute("value", "false"); }
-                            }
-                            catch (Exception e)
-                            {
-                                MessageBox.Show(e.ToString());
-                            }
-                        }
-                    }
-
-                }
-                #endregion
-
 
             }//foreach 遍历所有子节点 结束
 
@@ -275,7 +238,7 @@ namespace LoveNineBnsTools
         /// <param name="path">xmlFilePath路径</param>
         /// <param name="breast">摇乳是否开启，是为true(bool)</param>
         /// <param name="damage">6人伤害统计是否开启，是为true(bool)</param>
-        public void xmlRead(string path, out bool breast, out bool damage, out bool autoBUFF, out bool backRun, out bool fight, out bool JLG, out bool ZJXN)
+        public void xmlRead(string path, out bool breast, out bool damage, out bool autoBUFF, out bool backRun, out bool fight, out bool JLG, out bool ZJXN, out int GCD)
         {
             breast = false;
             damage = false;
@@ -284,6 +247,7 @@ namespace LoveNineBnsTools
             fight = false;
             JLG = false;
             ZJXN = false;
+            GCD = 100;
 
             string[] returnValues = new string[4];
             string[] returnMoves = new string[4];

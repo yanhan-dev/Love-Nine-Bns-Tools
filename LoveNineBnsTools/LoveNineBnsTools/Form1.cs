@@ -36,13 +36,7 @@ namespace LoveNineBnsTools
         #region 窗口载入事件
         private void Form1_Load(object sender, EventArgs e)
         {
-            init(); //初始化控件
-
-            //初始化运行环境
-            if (!releaseIonic())
-            {
-                MessageBox.Show("无法初始化运行环境，请右键点击本程序 以管理员身份运行");
-            }
+            init();
         }
         #endregion
 
@@ -107,8 +101,6 @@ namespace LoveNineBnsTools
             checkBox_autoBUFF.Checked = false;
             checkBox_backrun.Checked = false;
             checkBox_fight.Checked = false;
-            checkBox_JLG.Checked = false;
-            checkBox_ZuiJiaXingNeng.Checked = false;
             label_Now.Text = "恢复成功!";
 
         }
@@ -201,10 +193,10 @@ namespace LoveNineBnsTools
                 MessageBox.Show("解包失败，请重新解包，有问题请联系作者QQ:852932673。", "解包失败");
                 return;
 
-            }//总try结束
+            }
             catch (Exception e_bt_unpack)
             {
-                MessageBox.Show("请将以下内容截图反馈给作者QQ852932673\r\n" + e_bt_unpack.ToString(), "解包错误");
+                MessageBox.Show("请将以下内容截图反馈给作者QQ852932673\r\n" + e_bt_unpack.StackTrace, "解包错误");
             }
         }
 
@@ -218,7 +210,8 @@ namespace LoveNineBnsTools
                 label_Now.Text = "正在保存...";
 
                 xmlRW xml = new xmlRW();
-                bool breast = false, damage = false, autobuff = true, backRun = false, fight = false, JLG = false, ZJXN = false;
+                int GCD = 100;
+                bool breast = false, damage = false, autobuff = true, backRun = false, fight = false;
                 if (checkBox_Breast.Checked)
                 {
                     breast = true;
@@ -239,15 +232,11 @@ namespace LoveNineBnsTools
                 {
                     fight = true;
                 }
-                if (checkBox_JLG.Checked == true)
+                if (cbGCD.SelectedIndex != -1)
                 {
-                    JLG = true;
+                    GCD = int.Parse(cbGCD.SelectedValue.ToString());
                 }
-                if (checkBox_ZuiJiaXingNeng.Checked == true)
-                {
-                    ZJXN = true;
-                }
-                xml.xmlWrite(xmlFilePath, breast, damage, autobuff, backRun, fight, JLG, ZJXN);
+                xml.xmlWrite(xmlFilePath, breast, damage, autobuff, backRun, fight, GCD);
                 label_Now.Text = "保存完毕";
             }
             catch (Exception e_bt_save)
@@ -263,8 +252,9 @@ namespace LoveNineBnsTools
             try
             {
                 xmlRW xml = new xmlRW();
+                int GCD = 100;
                 bool breast, damage, autobuff, backRun, fight, JLG, ZJXN;
-                xml.xmlRead(xmlFilePath, out breast, out damage, out autobuff, out backRun, out fight, out JLG, out ZJXN);
+                xml.xmlRead(xmlFilePath, out breast, out damage, out autobuff, out backRun, out fight, out JLG, out ZJXN, out GCD);
 
                 if (breast == true) //摇乳选择框
                 {
@@ -275,7 +265,7 @@ namespace LoveNineBnsTools
                     checkBox_Breast.Checked = false;
                 }
 
-                if (damage == true) //6人伤害选择框
+                if (damage == true) //6人伤害
                 {
                     checkBox_Six.Checked = true;
                 }
@@ -283,7 +273,7 @@ namespace LoveNineBnsTools
                 {
                     checkBox_Six.Checked = false;
                 }
-                if (autobuff == true) //BUFF自动排序选择框
+                if (autobuff == true) //BUFF自动排序
                 {
                     checkBox_autoBUFF.Checked = false;
                 }
@@ -307,23 +297,7 @@ namespace LoveNineBnsTools
                 {
                     checkBox_fight.Checked = false;
                 }
-                if (JLG == true) //聚灵阁加速
-                {
-                    checkBox_JLG.Checked = true;
-                }
-                else
-                {
-                    checkBox_JLG.Checked = false;
-                }
-                if (ZJXN == true) //最佳性能模式
-                {
-                    checkBox_ZuiJiaXingNeng.Checked = true;
-                }
-                else
-                {
-                    checkBox_ZuiJiaXingNeng.Checked = false;
-                }
-
+                cbGCD.SelectedValue = GCD.ToString();
 
                 label_Now.Text = "载入成功！";
             }
@@ -417,29 +391,6 @@ namespace LoveNineBnsTools
         }
         #endregion
 
-        #region 释放 Ionic.Zlib.dll
-        private bool releaseIonic()
-        {
-            try
-            {
-                if (!File.Exists("Ionic.Zlib.dll"))
-                {
-                    File.WriteAllBytes(Directory.GetCurrentDirectory() + "\\Ionic.Zlib.dll", Resource1.Ionic_Zlib);
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-
-                return false;
-            }
-
-
-
-        }
-        #endregion
-
         #region BNSDat 解包操作
 
         public void Extractor(string qwerty)
@@ -518,7 +469,7 @@ namespace LoveNineBnsTools
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/laoluan/Love-Nine-Bns-Tools/releases");
+            Process.Start("https://github.com/laoluan/Love-Nine-Bns-Tools/releases");
         }
     }
 
