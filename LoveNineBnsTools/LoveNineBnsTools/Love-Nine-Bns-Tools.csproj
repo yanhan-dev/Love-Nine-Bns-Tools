@@ -114,6 +114,7 @@
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Love-Nine-Bns-Tools_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -128,6 +129,12 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\bnsdat.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bnsdat.exe" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -152,6 +159,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\Ionic.Zlib.dll" />
     <Content Include="bitbug_favicon.ico" />
   </ItemGroup>
   <ItemGroup>
