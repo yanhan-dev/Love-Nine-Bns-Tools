@@ -36,6 +36,8 @@
             this.textBox_Path = new System.Windows.Forms.TextBox();
             this.groupBox_Step2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbGCD = new System.Windows.Forms.ComboBox();
             this.checkBox_fight = new System.Windows.Forms.CheckBox();
             this.checkBox_backrun = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -49,8 +51,6 @@
             this.button_save = new System.Windows.Forms.Button();
             this.label_Now = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.cbGCD = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox_Step1.SuspendLayout();
             this.groupBox_Step2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -132,6 +132,36 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "慎重修改区";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(89, 78);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(23, 12);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "GCD";
+            // 
+            // cbGCD
+            // 
+            this.cbGCD.FormattingEnabled = true;
+            this.cbGCD.Items.AddRange(new object[] {
+            "100",
+            "130",
+            "150",
+            "170",
+            "190",
+            "200",
+            "210",
+            "220",
+            "230",
+            "240",
+            "250"});
+            this.cbGCD.Location = new System.Drawing.Point(19, 74);
+            this.cbGCD.Name = "cbGCD";
+            this.cbGCD.Size = new System.Drawing.Size(64, 20);
+            this.cbGCD.TabIndex = 12;
             // 
             // checkBox_fight
             // 
@@ -271,36 +301,6 @@
             this.linkLabel1.Text = "检查更新";
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // cbGCD
-            // 
-            this.cbGCD.FormattingEnabled = true;
-            this.cbGCD.Items.AddRange(new object[] {
-            "100",
-            "130",
-            "150",
-            "170",
-            "190",
-            "200",
-            "210",
-            "220",
-            "230",
-            "240",
-            "250"});
-            this.cbGCD.Location = new System.Drawing.Point(19, 74);
-            this.cbGCD.Name = "cbGCD";
-            this.cbGCD.Size = new System.Drawing.Size(64, 20);
-            this.cbGCD.TabIndex = 12;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(89, 78);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(23, 12);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "GCD";
             // 
             // Form1
             // 
