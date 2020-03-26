@@ -234,7 +234,7 @@ namespace LoveNineBnsTools
                 }
                 if (cbGCD.SelectedIndex != -1)
                 {
-                    GCD = int.Parse(cbGCD.SelectedValue.ToString());
+                    GCD = int.Parse(cbGCD.SelectedItem.ToString());
                 }
                 xml.xmlWrite(xmlFilePath, breast, damage, autobuff, backRun, fight, GCD);
                 label_Now.Text = "保存完毕";
@@ -297,7 +297,7 @@ namespace LoveNineBnsTools
                 {
                     checkBox_fight.Checked = false;
                 }
-                cbGCD.SelectedValue = GCD.ToString();
+                cbGCD.SelectedItem = GCD.ToString();
 
                 label_Now.Text = "载入成功！";
             }
